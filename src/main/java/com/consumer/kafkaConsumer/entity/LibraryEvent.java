@@ -14,9 +14,12 @@ import javax.persistence.OneToOne;
 @Entity
 public class LibraryEvent {
 	
+	
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long libraryEventId;
+	private Integer libraryEventId;
 	
 	@Enumerated(EnumType.STRING)
 	private LibraryEventType eventType;
@@ -24,7 +27,7 @@ public class LibraryEvent {
 	@OneToOne(mappedBy = "libraryEvent")
 	private Book book;
 
-	public LibraryEvent(Long libraryEventId, Book book) {
+	public LibraryEvent(Integer libraryEventId, Book book) {
 		super();
 		this.libraryEventId = libraryEventId;
 		this.book = book;
@@ -35,11 +38,11 @@ public class LibraryEvent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Long getLibraryEventId() {
+	public Integer getLibraryEventId() {
 		return libraryEventId;
 	}
 
-	public void setLibraryEventId(Long libraryEventId) {
+	public void setLibraryEventId(Integer libraryEventId) {
 		this.libraryEventId = libraryEventId;
 	}
 

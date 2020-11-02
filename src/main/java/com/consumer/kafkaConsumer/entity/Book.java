@@ -14,10 +14,10 @@ import javax.persistence.OneToOne;
 public class Book {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer bookId;
+    private Integer bookId;
 	private String bookName;
 	private String bookAuthor;
+	
 	
 	@OneToOne
     @JoinColumn(name = "libraryEventId")

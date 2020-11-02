@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.consumer.kafkaConsumer.entity.Book;
 import com.consumer.kafkaConsumer.entity.LibraryEvent;
 import com.consumer.kafkaConsumer.repository.BookRepository;
 import com.consumer.kafkaConsumer.repository.LibraryEventRepository;
@@ -48,7 +49,7 @@ public class LibraryEventService {
 	 case UPDATE:
 		 logger.info("update eventtype");
 		 validate(event);
-		 save(event);
+		   save(event);
 		 break;
 		 
 	default:
@@ -64,7 +65,10 @@ public class LibraryEventService {
 			logger.info("library event type cannot be null");
 			throw new IllegalArgumentException();
 		}
+		logger.info(" fetching library event id "+event.getLibraryEventId());
 		Optional<LibraryEvent> resultevent=repository.findById(event.getLibraryEventId());
+		//Optional<Book> resultbook=bookRepository.findById(event.getBook().getBookId());
+		
 		if(!resultevent.isPresent()) {
 			throw new IllegalArgumentException("Not a library event");
 		}
@@ -80,11 +84,10 @@ public class LibraryEventService {
 		logger.info("event :"+libraryEvent.getBook());
 			logger.info("after save");
 			
-			repository.saveAndFlush(libraryEvent);
-			bookRepository.saveAndFlush(libraryEvent.getBook());
+			repository.save(libraryEvent);
 			
-		
+			bookRepository.save(libraryEvent.getBook());
 		
 	}
-	
+   
 }
